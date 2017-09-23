@@ -1,20 +1,20 @@
 /*************************************************************************
- *  Copyright (C), 2017-2018, Mogoson tech. Co., Ltd.
+ *  Copyright (C), 2017-2018, Mogoson Tech. Co., Ltd.
  *  FileName: CubemapRenderer.cs
- *  Author: Mogoson   Version: 1.0   Date: 8/31/2017
+ *  Author: Mogoson   Version: 0.1.0   Date: 8/31/2017
  *  Version Description:
- *    Internal develop version,mainly to achieve its function.
+ *    Internal develop version, mainly to achieve its function.
  *  File Description:
  *    Ignore.
  *  Class List:
  *    <ID>           <name>             <description>
- *     1.       vCubemapRenderer           Ignore.
+ *     1.        CubemapRenderer           Ignore.
  *  Function List:
  *    <class ID>     <name>             <description>
  *     1.
  *  History:
  *    <ID>    <author>      <time>      <version>      <description>
- *     1.     Mogoson     8/31/2017       1.0        Build this file.
+ *     1.     Mogoson     8/31/2017       0.1.0        Create this file.
  *************************************************************************/
 
 namespace Developer.CubemapRenderer
@@ -25,8 +25,17 @@ namespace Developer.CubemapRenderer
     public class CubemapRenderer : ScriptableWizard
     {
         #region Property and Field
-        [Tooltip("Target render camera.")]
+        [Tooltip("Source camera to render Cubemap.")]
         public Camera renderCamera;
+        
+        [Tooltip("Width and height of a cube face in pixels.")]
+        public int faceSize = 128;
+
+        [Tooltip("Pixel data format to be used for the Cubemap.")]
+        public TextureFormat textureFormat = TextureFormat.RGBA32;
+
+        [Tooltip("Should mipmaps be created?")]
+        public bool mipmap = false;
         #endregion
 
         #region Private Method
@@ -36,17 +45,22 @@ namespace Developer.CubemapRenderer
             DisplayWizard("Cubemap Renderer", typeof(CubemapRenderer), "Render");
         }
 
-        void OnWizardUpdate()
+        private void OnEnable()
         {
-            if (renderCamera)
+            renderCamera = Camera.main;
+        }
+
+        private void OnWizardUpdate()
+        {
+            if (renderCamera && faceSize > 0)
                 isValid = true;
             else
                 isValid = false;
         }
 
-        void OnWizardCreate()
+        private void OnWizardCreate()
         {
-            var newRenderCubemap = new Cubemap(64, TextureFormat.ARGB32, false);
+            var newRenderCubemap = new Cubemap(faceSize, textureFormat, mipmap);
             renderCamera.RenderToCubemap(newRenderCubemap);
             var newCubemapPath = EditorUtility.SaveFilePanelInProject("Save New Render Cubemap", "NewRenderCubemap", "cubemap",
                 "Enter a file name to save the new render cubemap.");
@@ -54,6 +68,7 @@ namespace Developer.CubemapRenderer
                 return;
             AssetDatabase.CreateAsset(newRenderCubemap, newCubemapPath);
             AssetDatabase.Refresh();
+            Selection.activeObject = newRenderCubemap;
         }
         #endregion
     }
