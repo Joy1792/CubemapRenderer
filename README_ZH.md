@@ -27,11 +27,7 @@
 ## 图示
 - Cubemap Renderer
 
-![CubemapRenderer](./Attachments/CubemapRenderer.png)
-
-- New Render Cubemap
-
-![NewRenderCubemap](./Attachments/NewRenderCubemap.png)
+![CubemapRenderer](./Attachments/CubemapRenderer.gif)
 
 ## 联系
 - 如果你有任何问题或者建议，欢迎通过mogoson@qq.com联系我。
