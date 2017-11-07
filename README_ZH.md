@@ -24,10 +24,10 @@
 ## 实现
 - CubemapRenderer：绘制扩展编辑器窗口，渲染场景到Cubemap中。
 
-## 图示
+## 预览
 - Cubemap Renderer
 
-![CubemapRenderer](./Attachments/CubemapRenderer.gif)
+![CubemapRenderer](./Attachments/README_Image/CubemapRenderer.gif)
 
 ## 联系
 - 如果你有任何问题或者建议，欢迎通过mogoson@qq.com联系我。

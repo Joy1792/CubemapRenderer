@@ -25,7 +25,7 @@
 ## Preview
 - Cubemap Renderer
 
-![CubemapRenderer](./Attachments/CubemapRenderer.gif)
+![CubemapRenderer](./Attachments/README_Image/CubemapRenderer.gif)
 
 ## Contact
 - If you have any questions, feel free to contact me at mogoson@qq.com.
