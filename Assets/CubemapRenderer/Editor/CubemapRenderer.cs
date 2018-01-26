@@ -53,12 +53,18 @@ namespace Developer.CubemapRenderer
 
         private void OnWizardCreate()
         {
-            var newRenderCubemap = new Cubemap(faceSize, textureFormat, mipmap);
-            renderCamera.RenderToCubemap(newRenderCubemap);
-            var newCubemapPath = EditorUtility.SaveFilePanelInProject("Save New Render Cubemap",
-                "NewRenderCubemap", "cubemap", "Enter a file name to save the new render cubemap.");
+            var newCubemapPath = EditorUtility.SaveFilePanelInProject(
+                "Save New Render Cubemap",
+                "NewRenderCubemap",
+                "cubemap",
+                "Enter a file name to save the new render cubemap.");
+
             if (newCubemapPath == string.Empty)
                 return;
+
+            var newRenderCubemap = new Cubemap(faceSize, textureFormat, mipmap);
+            renderCamera.RenderToCubemap(newRenderCubemap);
+
             AssetDatabase.CreateAsset(newRenderCubemap, newCubemapPath);
             AssetDatabase.Refresh();
             Selection.activeObject = newRenderCubemap;
